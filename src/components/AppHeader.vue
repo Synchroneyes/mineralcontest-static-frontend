@@ -20,6 +20,11 @@
                 Discord
             </v-btn>
 
+            <v-btn rel="noopener noreferrer" target="_blank" href="https://github.com/Synchroneyes/mineralcontest"
+                class="text-white">
+                GitHub
+            </v-btn>
+
         </v-toolbar-title>
 
 
