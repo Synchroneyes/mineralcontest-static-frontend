@@ -7,9 +7,12 @@
                         <h3>{{ article.article_title }}</h3>
                     </v-card-title>
                     <v-card-actions>
-                        <v-btn :href="article.url" color="primary">
-                            Lire l'article
-                        </v-btn>
+                        <RouterLink :to="article.url || ''">
+                            <v-btn color="primary">
+                                Lire l'article
+                            </v-btn>
+                        </RouterLink>
+
                     </v-card-actions>
                 </v-card>
             </v-col>
