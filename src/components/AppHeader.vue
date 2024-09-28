@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar height="40" app>
+    <v-toolbar height="40" app v-if="!isMobile">
         <v-toolbar-title class="text-caption text-disabled">
             <RouterLink to="/">
                 <v-btn class="text-decoration-none on-surface" href="/" rel="noopener noreferrer" target="_blank">
@@ -26,12 +26,49 @@
             </v-btn>
 
         </v-toolbar-title>
+    </v-toolbar>
 
+    <v-toolbar height="40" app v-if="isMobile">
+        <v-toolbar-title class="text-caption text-disabled">
+            <RouterLink to="/">
+                <v-btn class="text-decoration-none on-surface" href="/" rel="noopener noreferrer" target="_blank">
+                    <v-icon>mdi-cube-outline</v-icon> Mineral Contest
+                </v-btn>
+            </RouterLink>
+        </v-toolbar-title>
 
+        <!-- Mobile Dropdown Menu -->
+        <v-menu activator="parent" offset-y bottom origin="top right">
+            <template v-slot:activator="{ props }">
+                <v-btn icon v-bind="props">
+                    <v-icon>mdi-menu</v-icon>
+                </v-btn>
+            </template>
+            <v-list>
+                <v-list-item v-for="route in routes" :key="route.title" @click="$router.push(route.href)">
+                    <v-list-item-title>{{ route.title }}</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="openDiscord">
+                    <v-list-item-title>Discord</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="openGitHub">
+                    <v-list-item-title>GitHub</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-menu>
     </v-toolbar>
 </template>
 
 <script setup lang="ts">
+import { computed, unref } from 'vue'
+import { useDisplay } from 'vuetify'
+
+const display = useDisplay()
+
+const isMobile = computed(() => {
+    return unref(display.mobile)
+})
+
 const routes = [
     {
         title: 'Accueil',
@@ -51,6 +88,13 @@ const routes = [
     },
 
 ]
+function openDiscord() {
+    window.open('https://discord.gg/dggP3Nv', '_blank');
+}
+
+function openGitHub() {
+    window.open('https://github.com/Synchroneyes/mineralcontest', '_blank');
+}
 </script>
 
 <style scoped lang="sass">

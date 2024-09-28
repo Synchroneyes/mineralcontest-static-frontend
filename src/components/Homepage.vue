@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height" style="position: relative; overflow: hidden;" width="900">
+  <v-container class="fill-height" style="position: relative; overflow: hidden;" :fluid="false" max-width="900">
     <!-- Video background -->
 
 

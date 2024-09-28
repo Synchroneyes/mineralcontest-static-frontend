@@ -109,21 +109,4 @@ ul {
     color: white;
     /* Set markdown rendered text color to white */
 }
-
-td {
-    color: black;
-    /* Set text color to black */
-}
-
-th {
-    color: black;
-    /* Set text color to black */
-}
-
-table,
-th,
-td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
 </style>

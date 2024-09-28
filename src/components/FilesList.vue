@@ -2,7 +2,7 @@
     <v-container>
         <v-responsive>
             <v-data-table :items="files" :sort-by="[{ key: 'type', order: 'asc' }, { 'key': 'version', order: 'desc' }]"
-                :multi-sort="true" :sort-desc="[sortDesc]" :loading="loading">
+                :multi-sort="true" :sort-desc="[sortDesc]" :loading="loading" class="text-white">
                 <!-- Template for download_url as a button -->
                 <template #item.telechargement="{ item }">
                     <v-btn :href="item.telechargement" color="primary">
