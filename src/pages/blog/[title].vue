@@ -29,6 +29,7 @@ import MarkdownItTasklists from "markdown-it-task-lists";
 import MarkdownItTOC from "markdown-it-toc-done-right";
 // @ts-ignore
 import MarkdownItVideo from "markdown-it-video";
+
 import 'highlight.js/styles/atom-one-dark-reasonable.css'; // Importing highlight.js CSS
 
 
@@ -41,11 +42,12 @@ const markdown = new MarkdownIt()
     .use(MarkdownItSup)
     .use(MarkdownItTasklists)
     .use(MarkdownItTOC)
-    .use(MarkdownItVideo);
+    .use(MarkdownItVideo)
 
 const route = useRoute(); // Get the current route
 const title = ref(route.params.title); // Access the title parameter from the route
 const content = ref(''); // Initialize the content ref
+
 
 
 
@@ -106,5 +108,22 @@ ul {
 .markdown-text {
     color: white;
     /* Set markdown rendered text color to white */
+}
+
+td {
+    color: black;
+    /* Set text color to black */
+}
+
+th {
+    color: black;
+    /* Set text color to black */
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 </style>
