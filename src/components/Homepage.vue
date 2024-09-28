@@ -27,27 +27,32 @@
 
         <!-- Remaining content as is -->
         <v-col cols="6">
-          <v-card append-icon="mdi-open-in-new" class="py-4" href="/blog" prepend-icon="mdi-post"
-            rel="noopener noreferrer" rounded="lg" subtitle="Explorez la liste des cartes disponible." title="Blog"
-            variant="text">
-            <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
-          </v-card>
+
+          <RouterLink to="/blog">
+            <v-card append-icon="mdi-open-in-new" class="py-4" prepend-icon="mdi-post" rel="noopener noreferrer"
+              rounded="lg" subtitle="Explorez la liste des cartes disponible." title="Blog" variant="text">
+              <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
+            </v-card>
+          </RouterLink>
         </v-col>
 
         <v-col cols="6">
-          <v-card append-icon="mdi-open-in-new" class="py-4" href="/maps" prepend-icon="mdi-map"
-            rel="noopener noreferrer" rounded="lg" subtitle="Explorez la liste des cartes disponible." title="Cartes"
-            variant="text">
-            <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
-          </v-card>
+          <RouterLink to="/maps">
+            <v-card append-icon="mdi-open-in-new" class="py-4" prepend-icon="mdi-map" rel="noopener noreferrer"
+              rounded="lg" subtitle="Explorez la liste des cartes disponible." title="Cartes" variant="text">
+              <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
+            </v-card>
+          </RouterLink>
         </v-col>
 
         <v-col cols="6">
-          <v-card append-icon="mdi-open-in-new" class="py-4" href="/files" prepend-icon="mdi-widgets-outline"
-            rel="noopener noreferrer" rounded="lg" subtitle="Téléchargez la version qui vous convient." title="Plugins"
-            variant="text">
-            <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
-          </v-card>
+          <RouterLink to="/files">
+            <v-card append-icon="mdi-open-in-new" class="py-4" prepend-icon="mdi-widgets-outline"
+              rel="noopener noreferrer" rounded="lg" subtitle="Téléchargez la version qui vous convient."
+              title="Plugins" variant="text">
+              <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
+            </v-card>
+          </RouterLink>
         </v-col>
 
         <v-col cols="6">
