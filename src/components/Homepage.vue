@@ -56,7 +56,7 @@
         </v-col>
 
         <v-col cols="6">
-          <v-card append-icon="mdi-open-in-new" class="py-4" href="https://discord.vuetifyjs.com"
+          <v-card append-icon="mdi-open-in-new" class="py-4" href="https://discord.gg/dggP3Nv"
             prepend-icon="mdi-account-group-outline" rel="noopener noreferrer" rounded="lg"
             subtitle="La communauté est active sur Discord." target="_blank" title="Communauté" variant="text">
             <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
