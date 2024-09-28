@@ -28,7 +28,7 @@
         <!-- Remaining content as is -->
         <v-col cols="6">
 
-          <RouterLink to="/blog">
+          <RouterLink to="/blog" style="text-decoration: none; color: inherit;">
             <v-card append-icon="mdi-open-in-new" class="py-4" prepend-icon="mdi-post" rel="noopener noreferrer"
               rounded="lg" subtitle="Explorez la liste des cartes disponible." title="Blog" variant="text">
               <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
@@ -37,7 +37,7 @@
         </v-col>
 
         <v-col cols="6">
-          <RouterLink to="/maps">
+          <RouterLink to="/maps" style="text-decoration: none; color: inherit;">
             <v-card append-icon="mdi-open-in-new" class="py-4" prepend-icon="mdi-map" rel="noopener noreferrer"
               rounded="lg" subtitle="Explorez la liste des cartes disponible." title="Cartes" variant="text">
               <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
@@ -46,7 +46,7 @@
         </v-col>
 
         <v-col cols="6">
-          <RouterLink to="/files">
+          <RouterLink to="/files" style="text-decoration: none; color: inherit;">
             <v-card append-icon="mdi-open-in-new" class="py-4" prepend-icon="mdi-widgets-outline"
               rel="noopener noreferrer" rounded="lg" subtitle="Téléchargez la version qui vous convient."
               title="Plugins" variant="text">
