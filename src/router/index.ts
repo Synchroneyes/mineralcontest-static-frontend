@@ -11,6 +11,18 @@ import { routes } from 'vue-router/auto-routes'
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      const element = document.querySelector(to.hash);
+      if (element) {
+        return {
+          el: to.hash,
+          behavior: 'smooth',
+        };
+      }
+    }
+    return { top: 0 }; // Position par défaut au sommet si pas de hash
+  }
 })
 
 // Workaround for https://github.com/vitejs/vite/issues/11804

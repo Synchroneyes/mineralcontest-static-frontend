@@ -41,7 +41,9 @@ const markdown = new MarkdownIt()
     .use(MarkdownItSub)
     .use(MarkdownItSup)
     .use(MarkdownItTasklists)
-    .use(MarkdownItTOC)
+    .use(MarkdownItTOC, {
+        slugify: (s: string) => "/blog/" + title.value + "/#" + String(s).trim().toLowerCase().replace(/\s+/g, '-'),
+    })
     .use(MarkdownItVideo)
 
 const route = useRoute(); // Get the current route
