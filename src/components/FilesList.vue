@@ -2,10 +2,10 @@
     <v-container>
         <v-responsive>
             <v-data-table :items="files" :sort-by="[{ key: 'type', order: 'asc' }, { 'key': 'version', order: 'desc' }]"
-                :multi-sort="true" :sort-desc="[desc]" :loading="loading">
+                :multi-sort="true" :sort-desc="[sortDesc]" :loading="loading">
                 <!-- Template for download_url as a button -->
                 <template #item.telechargement="{ item }">
-                    <v-btn :href="item.telechargement" color="primary" text>
+                    <v-btn :href="item.telechargement" color="primary">
                         Télécharger
                     </v-btn>
                 </template>
@@ -30,8 +30,17 @@
 import { ref, onMounted, toRaw } from 'vue';
 import { api } from '@/services/api';
 
-const files = ref([]);
+interface FileItem {
+    type: string;
+    version: string;
+    version_serveur: string;
+    taille: string;
+    telechargement: string;
+}
+
+const files = ref<FileItem[]>([]);
 const loading = ref(true);
+const sortDesc = ref([true]); // Define the sortDesc property
 
 // Use onMounted lifecycle hook for API call
 onMounted(async () => {

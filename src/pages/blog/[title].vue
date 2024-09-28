@@ -9,18 +9,25 @@
 </template>
 
 <script setup lang="ts">
+
 import { useRoute } from 'vue-router'; // Import useRoute from vue-router
 import { ref, onMounted } from 'vue';
 import { api } from '@/services/api';
 import MarkdownIt from "markdown-it";
+// @ts-ignore
 import MarkdownItAbbr from "markdown-it-abbr";
 import MarkdownItAnchor from "markdown-it-anchor";
+// @ts-ignore
 import MarkdownItFootnote from "markdown-it-footnote";
 import MarkdownItHighlightjs from "markdown-it-highlightjs";
+// @ts-ignore
 import MarkdownItSub from "markdown-it-sub";
+// @ts-ignore
 import MarkdownItSup from "markdown-it-sup";
+// @ts-ignore
 import MarkdownItTasklists from "markdown-it-task-lists";
 import MarkdownItTOC from "markdown-it-toc-done-right";
+// @ts-ignore
 import MarkdownItVideo from "markdown-it-video";
 import 'highlight.js/styles/atom-one-dark-reasonable.css'; // Importing highlight.js CSS
 
@@ -46,7 +53,8 @@ markdown.render(content.value);
 
 onMounted(async () => {
     try {
-        content.value = (await api.getArticleContent(title.value)).data; // Fetch the article content
+        const articleTitle = Array.isArray(title.value) ? title.value[0] : title.value;
+        content.value = (await api.getArticleContent(articleTitle)).data; // Fetch the article content
         console.log(content.value);
     } catch (error) {
         console.error("Error fetching articles:", error);

@@ -13,7 +13,7 @@
         <div class="text-body-2 font-weight-light mb-n1">Par Synchroneyes</div>
       </div>
 
-      <div class="py-4" />
+      <div class="py-4"></div>
 
       <v-row>
         <v-col cols="12">
@@ -67,8 +67,17 @@ import { ref, onMounted, toRaw } from 'vue';
 import { api } from '@/services/api';
 
 // Define reactive variables using ref
-const files = ref([]);
-const latestVersion = ref({});
+interface FileData {
+  plugins: Record<string, any>;
+}
+
+const files = ref<FileData>({ plugins: {} });
+interface VersionData {
+  file_url: string;
+  // Add other properties if needed
+}
+
+const latestVersion = ref<VersionData>({ file_url: '' });
 
 // Use onMounted lifecycle hook for API call
 onMounted(async () => {
