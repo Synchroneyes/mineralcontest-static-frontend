@@ -24,7 +24,7 @@ export module api {
     export function getArticleContent(title: string) {
         return axios({
             method: 'get',
-            url: "https://api.mc.monvoisin-kevin.fr" + '/blog/' + title + '.md'
+            url: "https://api.mc.monvoisin-kevin.fr" + '/blog/' + title
         })
     }
 

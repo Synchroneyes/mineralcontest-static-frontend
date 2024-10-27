@@ -4,14 +4,22 @@
             <v-col v-for="(article, index) in articles" :key="index" cols="12" sm="6" md="4">
                 <v-card class="ma-2">
                     <v-card-title>
-                        <h3>{{ article.article_title }}</h3>
+                        <h4>{{ article.article_title }}</h4>
                     </v-card-title>
+
+                    <v-card-subtitle>
+                        <p>Publié par {{ article.article_author }}</p>
+                    </v-card-subtitle>
+                    <v-card-item>
+                        <p>{{ article.article_description }}</p>
+                    </v-card-item>
                     <v-card-actions>
                         <RouterLink :to="article.url || ''">
                             <v-btn color="primary">
                                 Lire l'article
                             </v-btn>
                         </RouterLink>
+
 
                     </v-card-actions>
                 </v-card>
@@ -27,6 +35,8 @@ import { api } from "@/services/api"; // Adjust the import path as necessary
 interface Article {
     article_title: string;
     slug?: string;
+    article_description?: string;
+    article_author?: string;
     url?: string;
 }
 
@@ -38,11 +48,10 @@ onMounted(async () => {
         articles.value = response.data;
 
         articles.value.forEach((article: any) => {
-            article.slug = article.article_title.toLowerCase().replace(' ', '-');
+            article.slug = article.article_url.split("/").slice(-1)[0].toLowerCase().replace(' ', '-');
             article.url = `/blog/${article.slug}`.replace(' ', '-');
         });
 
-        console.log(articles.value);
     } catch (error) {
         console.error("Error fetching articles:", error);
     }

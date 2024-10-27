@@ -14,6 +14,9 @@ import { useRoute } from 'vue-router'; // Import useRoute from vue-router
 import { ref, onMounted } from 'vue';
 import { api } from '@/services/api';
 import MarkdownIt from "markdown-it";
+
+import markdownItMeta from 'markdown-it-meta';
+
 // @ts-ignore
 import MarkdownItAbbr from "markdown-it-abbr";
 import MarkdownItAnchor from "markdown-it-anchor";
@@ -30,6 +33,7 @@ import MarkdownItTOC from "markdown-it-toc-done-right";
 // @ts-ignore
 import MarkdownItVideo from "markdown-it-video";
 
+
 import 'highlight.js/styles/atom-one-dark-reasonable.css'; // Importing highlight.js CSS
 
 
@@ -41,6 +45,7 @@ const markdown = new MarkdownIt()
     .use(MarkdownItSub)
     .use(MarkdownItSup)
     .use(MarkdownItTasklists)
+    .use(markdownItMeta)
     .use(MarkdownItTOC, {
         slugify: (s: string) => "/blog/" + title.value + "/#" + String(s).trim().toLowerCase().replace(/\s+/g, '-'),
     })
@@ -57,6 +62,8 @@ markdown.render(content.value);
 
 onMounted(async () => {
     try {
+
+        console.log(title)
         const articleTitle = Array.isArray(title.value) ? title.value[0] : title.value;
         content.value = (await api.getArticleContent(articleTitle)).data; // Fetch the article content
         console.log(content.value);
@@ -110,5 +117,9 @@ ul {
 .markdown-text {
     color: white;
     /* Set markdown rendered text color to white */
+}
+
+li {
+    color: #555;
 }
 </style>

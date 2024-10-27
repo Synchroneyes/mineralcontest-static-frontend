@@ -30,7 +30,7 @@
 
           <RouterLink to="/blog" style="text-decoration: none; color: inherit;">
             <v-card append-icon="mdi-open-in-new" class="py-4" prepend-icon="mdi-post" rel="noopener noreferrer"
-              rounded="lg" subtitle="Explorez la liste des cartes disponible." title="Blog" variant="text">
+              rounded="lg" subtitle="Explorez la liste des articles disponible." title="Blog" variant="text">
               <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
             </v-card>
           </RouterLink>
