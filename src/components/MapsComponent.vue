@@ -14,7 +14,10 @@
           {{ map.map_description }}
         </v-card-subtitle>
 
-        <v-card-text>Taille: {{ map.map_size_display }}</v-card-text>
+        <v-card-text>Taille: {{ map.map_size_display }} <br /> Nombre de téléchargements: {{ map.download_count
+        }}</v-card-text>
+
+        <v-card-text></v-card-text>
 
         <!-- Centering the button inside v-card-actions -->
         <v-card-actions class="justify-center">
@@ -41,6 +44,7 @@
 <script setup lang="ts">
 import { defineProps, ref, computed, onMounted } from 'vue';
 
+
 // Define props to receive the maps array
 interface Map {
   map_thumbnail: string;
@@ -48,6 +52,7 @@ interface Map {
   map_description: string;
   map_size_display: string;
   map_url: string;
+  download_count: number
 }
 
 import { PropType } from 'vue';

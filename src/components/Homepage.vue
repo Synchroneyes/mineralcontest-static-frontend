@@ -62,6 +62,20 @@
             <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
           </v-card>
         </v-col>
+
+        <v-col cols="6">
+          <v-card class="py-4" prepend-icon="mdi-chart-bar" rel="noopener noreferrer" rounded="lg"
+            :subtitle=pluginDownloadCountText target="_blank" title="Stats - Plugins" variant="text">
+            <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
+          </v-card>
+        </v-col>
+
+        <v-col cols="6">
+          <v-card class="py-4" prepend-icon="mdi-chart-bar" rel="noopener noreferrer" rounded="lg"
+            :subtitle=mapsDownloadCountText title="Stats - Cartes" variant="text">
+            <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
+          </v-card>
+        </v-col>
       </v-row>
     </v-responsive>
   </v-container>
@@ -70,6 +84,11 @@
 <script setup lang="ts">
 import { ref, onMounted, toRaw } from 'vue';
 import { api } from '@/services/api';
+import { getTotalPluginDownloadCount, getTotalMapDownloadCount } from '@/services/github';
+
+const pluginDownloadCountText = ref('Nombre de téléchargements: 0');
+const mapsDownloadCountText = ref('Nombre de téléchargements: 0');
+
 
 // Define reactive variables using ref
 interface FileData {
@@ -91,6 +110,15 @@ onMounted(async () => {
     files.value = response.data; // Assign the data to the files ref
     let plugins = files.value.plugins;
     latestVersion.value = getLatestVersion(plugins);
+
+    const pluginCount = await getTotalPluginDownloadCount();
+    const mapCount = await getTotalMapDownloadCount();
+
+    // Format numbers with spaces as thousands separators
+    const formatNumber = (num: number) => num.toLocaleString('fr-FR');
+
+    pluginDownloadCountText.value = `Nombre de téléchargements: ${formatNumber(pluginCount)}`;
+    mapsDownloadCountText.value = `Nombre de téléchargements: ${formatNumber(mapCount)}`;
 
   } catch (error) {
     console.error('Failed to fetch files:', error);

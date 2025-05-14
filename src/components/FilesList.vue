@@ -17,6 +17,7 @@
                         <th>Version Serveur</th>
                         <th>Taille</th>
                         <th>Lien</th> <!-- Replacing 'download_url' with 'Lien' -->
+                        <th>Nombre de téléchargements</th>
                     </tr>
                 </template>
                 <!-- Custom headers to change 'download_url' to 'Lien' -->
@@ -29,6 +30,7 @@
 <script setup lang="ts">
 import { ref, onMounted, toRaw } from 'vue';
 import { api } from '@/services/api';
+import { getPluginDownloadCount } from '@/services/github';
 
 interface FileItem {
     type: string;
@@ -36,6 +38,7 @@ interface FileItem {
     version_serveur: string;
     taille: string;
     telechargement: string;
+    nombre_telechargements: number;
 }
 
 const files = ref<FileItem[]>([]);
@@ -46,7 +49,6 @@ const sortDesc = ref([true]); // Define the sortDesc property
 onMounted(async () => {
     try {
         const response = (await api.getFilesList()).data;
-        console.log(response.plugins);
 
         // Push "map_creation" data into the files array
         for (const key in response.map_creation) {
@@ -56,7 +58,9 @@ onMounted(async () => {
                 version_serveur: response.map_creation[key].file_server_version,
                 taille: response.map_creation[key].file_size_display,
                 telechargement: response.map_creation[key].file_url,
+                nombre_telechargements: await getPluginDownloadCount("map_creation-" + response.map_creation[key].file_version),
             });
+
         }
 
         // Push "plugins" data into the files array
@@ -67,12 +71,12 @@ onMounted(async () => {
                 version_serveur: response.plugins[key].file_server_version,
                 taille: response.plugins[key].file_size_display,
                 telechargement: response.plugins[key].file_url,
+                nombre_telechargements: await getPluginDownloadCount("plugins-" + response.plugins[key].file_version),
+
             });
         }
 
         loading.value = false;
-        // Output raw data for debugging
-        console.log(toRaw(files.value));
     } catch (error) {
         console.error('Failed to fetch files:', error);
     }
