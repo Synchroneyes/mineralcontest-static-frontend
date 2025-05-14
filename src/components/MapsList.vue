@@ -1,6 +1,21 @@
 <template>
     <v-container>
         <v-responsive>
+            <v-row>
+                <v-col cols="12">
+                    <v-card>
+                        <v-card-title>Maps</v-card-title>
+                        <v-card-subtitle class="display-2">Instructions</v-card-subtitle>
+                        <v-card-text class="display-2">Pour installer une carte, il suffit de télécharger la carte
+                            souhaité. Une
+                            fois effectué, il faut extraire l'archive dans le dossier plugins/MineralContest/worlds/ de
+                            votre serveur. Vous devriez alors voir un nouveau dossier, ayant comme prefix <b>mc_</b> et
+                            en redémarrant votre serveur, vous selectionner votre carte dans le menu de vote!
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>
+
             <MapsLoading :enabled="loadingMaps" />
             <MapsComponent :maps="maps" />
         </v-responsive>
