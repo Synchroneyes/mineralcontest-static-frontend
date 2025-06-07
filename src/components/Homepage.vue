@@ -44,39 +44,40 @@
             </v-card>
           </RouterLink>
         </v-col>
+        </v-row>
+      <v-row>
+          <v-col cols="6">
+            <RouterLink to="/files" style="text-decoration: none; color: inherit;">
+              <v-card append-icon="mdi-open-in-new" class="py-4" prepend-icon="mdi-widgets-outline"
+                rel="noopener noreferrer" rounded="lg" subtitle="Téléchargez la version qui vous convient."
+                title="Plugins" variant="text">
+                <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
+              </v-card>
+            </RouterLink>
+          </v-col>
 
-        <v-col cols="6">
-          <RouterLink to="/files" style="text-decoration: none; color: inherit;">
-            <v-card append-icon="mdi-open-in-new" class="py-4" prepend-icon="mdi-widgets-outline"
-              rel="noopener noreferrer" rounded="lg" subtitle="Téléchargez la version qui vous convient."
-              title="Plugins" variant="text">
-              <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
+          <v-col cols="6">
+            <v-card append-icon="mdi-open-in-new" class="py-4" href="https://discord.gg/dggP3Nv"
+              prepend-icon="mdi-account-group-outline" rel="noopener noreferrer" rounded="lg"
+              subtitle="La communauté est active sur Discord." target="_blank" title="Communauté" variant="text">
+              <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
             </v-card>
-          </RouterLink>
-        </v-col>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-card class="py-4" prepend-icon="mdi-chart-bar" rel="noopener noreferrer" rounded="lg"
+              target="_blank" title="Stats - Plugin" variant="text">
+              <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
+              <v-card-subtitle>
+                <p>{{ pluginDownloadCountText }}</p>
+                <p>{{ mapsDownloadCountText }}</p>
+                <p>{{ gamePlayedCountText }}</p>
+              </v-card-subtitle>
+            </v-card>
+          </v-col>
 
-        <v-col cols="6">
-          <v-card append-icon="mdi-open-in-new" class="py-4" href="https://discord.gg/dggP3Nv"
-            prepend-icon="mdi-account-group-outline" rel="noopener noreferrer" rounded="lg"
-            subtitle="La communauté est active sur Discord." target="_blank" title="Communauté" variant="text">
-            <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card class="py-4" prepend-icon="mdi-chart-bar" rel="noopener noreferrer" rounded="lg"
-            :subtitle=pluginDownloadCountText target="_blank" title="Stats - Plugins" variant="text">
-            <v-overlay opacity=".2" scrim="warning" contained model-value persistent />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card class="py-4" prepend-icon="mdi-chart-bar" rel="noopener noreferrer" rounded="lg"
-            :subtitle=mapsDownloadCountText title="Stats - Cartes" variant="text">
-            <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
-          </v-card>
-        </v-col>
-      </v-row>
+        </v-row>
     </v-responsive>
   </v-container>
 </template>
@@ -84,12 +85,11 @@
 <script setup lang="ts">
 import { ref, onMounted, toRaw } from 'vue';
 import { api } from '@/services/api';
-import { getTotalPluginDownloadCount, getTotalMapDownloadCount } from '@/services/github';
+import { getTotalPluginDownloadCount, getTotalMapDownloadCount, getTotalPlayedGame } from '@/services/github';
 
-const pluginDownloadCountText = ref('Nombre de téléchargements: 0');
-const mapsDownloadCountText = ref('Nombre de téléchargements: 0');
-
-
+const pluginDownloadCountText = ref('Nombre de plugins téléchargés: 0<br/>aa');
+const mapsDownloadCountText = ref('Nombre de cartes téléchargés: 0');
+const gamePlayedCountText = ref('Nombre de partie joués: 0');
 // Define reactive variables using ref
 interface FileData {
   plugins: Record<string, any>;
@@ -113,13 +113,14 @@ onMounted(async () => {
 
     const pluginCount = await getTotalPluginDownloadCount();
     const mapCount = await getTotalMapDownloadCount();
+    const gamePlayed = await getTotalPlayedGame();
 
     // Format numbers with spaces as thousands separators
     const formatNumber = (num: number) => num.toLocaleString('fr-FR');
 
-    pluginDownloadCountText.value = `Nombre de téléchargements: ${formatNumber(pluginCount)}`;
-    mapsDownloadCountText.value = `Nombre de téléchargements: ${formatNumber(mapCount)}`;
-
+    pluginDownloadCountText.value = `Nombre de plugins téléchargés: ${formatNumber(pluginCount+107115)} `; // 107115 correspond au nombre de plugins téléchargés sur l'ancien site
+    mapsDownloadCountText.value = `Nombre de cartes téléchargées  : ${formatNumber(mapCount+40033)}`; // 40033 correspond au nombre de cartes téléchargées sur l'ancien site
+    gamePlayedCountText.value = `Nombre de partie jouées: ${formatNumber(gamePlayed+13115)}`; // 13115 correspond au nombre de parties jouées sur l'ancien site
   } catch (error) {
     console.error('Failed to fetch files:', error);
   } finally {

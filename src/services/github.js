@@ -95,3 +95,9 @@ export async function getTotalMapDownloadCount() {
 
     return total;
 }
+
+export async function getTotalPlayedGame() {
+    let releases = await getGitHubReleases();
+
+    return releases.find(release => release.tag_name === "stats-gamestarted").assets[0].download_count;
+}
