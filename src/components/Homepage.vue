@@ -118,9 +118,9 @@ onMounted(async () => {
     // Format numbers with spaces as thousands separators
     const formatNumber = (num: number) => num.toLocaleString('fr-FR');
 
-    pluginDownloadCountText.value = `Nombre de plugins téléchargés: ${formatNumber(pluginCount+107115)} `; // 107115 correspond au nombre de plugins téléchargés sur l'ancien site
-    mapsDownloadCountText.value = `Nombre de cartes téléchargées  : ${formatNumber(mapCount+40033)}`; // 40033 correspond au nombre de cartes téléchargées sur l'ancien site
-    gamePlayedCountText.value = `Nombre de partie jouées: ${formatNumber(gamePlayed+13115)}`; // 13115 correspond au nombre de parties jouées sur l'ancien site
+    pluginDownloadCountText.value = `Nombre de plugins téléchargés: ${formatNumber(pluginCount+107115)} (depuis 14/05/2025: ${formatNumber(pluginCount)})`; // 107115 correspond au nombre de plugins téléchargés sur l'ancien site
+    mapsDownloadCountText.value = `Nombre de cartes téléchargées  : ${formatNumber(mapCount+40033)} (depuis 14/05/2025: ${formatNumber(mapCount)})`; // 40033 correspond au nombre de cartes téléchargées sur l'ancien site
+    gamePlayedCountText.value = `Nombre de partie jouées: ${formatNumber(gamePlayed+13115)} (depuis 14/05/2025: ${formatNumber(gamePlayed)})`; // 13115 correspond au nombre de parties jouées sur l'ancien site
   } catch (error) {
     console.error('Failed to fetch files:', error);
   } finally {
