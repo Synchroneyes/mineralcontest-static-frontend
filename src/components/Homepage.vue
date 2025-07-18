@@ -19,7 +19,7 @@
         <v-col cols="12">
           <v-card prepend-icon="mdi-rocket-launch-outline" class="py-4" :href="latestVersion.file_url"
             append-icon="mdi-download" rel="noopener noreferrer" rounded="lg"
-            subtitle="Cliquez ici et téléchargez simplement la dernière version du plugin."
+            :subtitle="latestVersionText"
             title="Un plugin gratuit et Open-Source" variant="outlined">
             <v-overlay opacity=".2" scrim="primary-darken-1" contained model-value persistent />
           </v-card>
@@ -90,6 +90,7 @@ import { getTotalPluginDownloadCount, getTotalMapDownloadCount, getTotalPlayedGa
 const pluginDownloadCountText = ref('Nombre de plugins téléchargés: 0<br/>aa');
 const mapsDownloadCountText = ref('Nombre de cartes téléchargés: 0');
 const gamePlayedCountText = ref('Nombre de partie joués: 0');
+const latestVersionText = ref('Cliquez ici et téléchargez simplement la dernière version du plugin.');
 // Define reactive variables using ref
 interface FileData {
   plugins: Record<string, any>;
@@ -110,6 +111,8 @@ onMounted(async () => {
     files.value = response.data; // Assign the data to the files ref
     let plugins = files.value.plugins;
     latestVersion.value = getLatestVersion(plugins);
+
+    latestVersionText.value = `Cliquez ici et téléchargez simplement la dernière version du plugin: ${latestVersion.value.file_version} - Requiert Spigot ${latestVersion.value.file_server_version}.`;
 
     const pluginCount = await getTotalPluginDownloadCount();
     const mapCount = await getTotalMapDownloadCount();
