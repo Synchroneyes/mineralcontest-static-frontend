@@ -93,16 +93,21 @@ const gamePlayedCountText = ref('Nombre de partie joués: 0');
 const latestVersionText = ref('Cliquez ici et téléchargez simplement la dernière version du plugin.');
 // Define reactive variables using ref
 interface FileData {
-  plugins: Record<string, any>;
+  plugins: Record<string, VersionData>;
 }
 
 const files = ref<FileData>({ plugins: {} });
 interface VersionData {
   file_url: string;
-  // Add other properties if needed
+  file_version: string;
+  file_server_version: string;
 }
 
-const latestVersion = ref<VersionData>({ file_url: '' });
+const latestVersion = ref<VersionData>({
+  file_url: '',
+  file_version: '',
+  file_server_version: '',
+});
 
 // Use onMounted lifecycle hook for API call
 onMounted(async () => {
@@ -130,8 +135,16 @@ onMounted(async () => {
   }
 });
 
-function getLatestVersion(plugins: Record<string, any>) {
+function getLatestVersion(plugins: Record<string, VersionData>): VersionData {
   const versions = Object.keys(plugins);
+
+  if (versions.length === 0) {
+    return {
+      file_url: '',
+      file_version: '',
+      file_server_version: '',
+    };
+  }
 
   // Sort versions by comparing each part of the version numbers
   const sortedVersions = versions.sort((a, b) => {
