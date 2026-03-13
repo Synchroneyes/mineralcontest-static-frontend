@@ -6,6 +6,22 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mineral Contest - Par Synchroneyes</title>
+    <script>
+        // Restore clean path after GitHub Pages 404 redirect (?p=/route).
+        (function () {
+            var query = window.location.search;
+            if (query && query.indexOf('?p=') === 0) {
+                var pathname = decodeURIComponent(query.slice(3).split('&')[0] || '/');
+                var search = '';
+                var searchMatch = query.match(/&q=(.*)$/);
+                if (searchMatch && searchMatch[1]) {
+                    search = decodeURIComponent(searchMatch[1]).replace(/~and~/g, '&');
+                }
+                var hash = window.location.hash || '';
+                window.history.replaceState(null, '', pathname + search + hash);
+            }
+        })();
+    </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6009197275418734"
         crossorigin="anonymous"></script>
 </head>
